@@ -1,0 +1,8 @@
+name: CustomTest
+description: Test the Custom plugin and demonstrate how to make custom items
+author: StarTux
+version: 0.1
+main: com.winthier.customtest.CustomTestPlugin
+depend: [ Custom ]
+commands: {}
+permissions: {}
