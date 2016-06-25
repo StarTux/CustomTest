@@ -28,10 +28,8 @@
     <!-- Spigot-API -->
     <dependency>
       <groupId>org.spigotmc</groupId>
-      <artifactId>spigot</artifactId>
+      <artifactId>spigot-api</artifactId>
       <version>1.10-R0.1-SNAPSHOT</version>
-      <systemPath>${basedir}/lib/spigot.jar</systemPath>
-      <scope>system</scope>
     </dependency>
     <!-- Lombok -->
     <dependency>

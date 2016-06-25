@@ -13,6 +13,5 @@ public class CustomTestPlugin extends JavaPlugin implements Listener {
     @EventHandler
     public void onItemRegister(ItemRegisterEvent event) {
         event.registerItem(new TestItem());
-        event.registerItem(new GrowStickItem());
     }
 }
