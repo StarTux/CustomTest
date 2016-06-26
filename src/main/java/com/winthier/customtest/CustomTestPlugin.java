@@ -1,7 +1,10 @@
 package com.winthier.customtest;
 
 import com.winthier.custom.item.CraftingRecipe;
+import com.winthier.custom.item.DummyItem;
 import com.winthier.custom.item.ItemRegisterEvent;
+import com.winthier.custom.item.ItemUtil;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,5 +24,14 @@ public class CustomTestPlugin extends JavaPlugin implements Listener {
                                  null, "TestItem", null,
                                  "TestItem", "TestItem", "TestItem",
                                  null, "TestItem", null));
+
+        event.registerItem(new DummyItem("EnderDust", "Ender Dust", Material.CHORUS_FRUIT_POPPED, "Combine 9 of these into a Home Stone", ItemUtil.getDefaultEnchantments()));
+        event.registerItem(new HomeStoneItem());
+        event.registerRecipe(new CraftingRecipe(
+                                 "Home Stone",
+                                 "HomeStone",
+                                 "EnderDust", "EnderDust", "EnderDust",
+                                 "EnderDust", "EnderDust", "EnderDust",
+                                 "EnderDust", "EnderDust", "EnderDust"));
     }
 }
