@@ -14,5 +14,6 @@ public class CustomTestPlugin extends JavaPlugin implements Listener {
     public void onCustomRegister(CustomRegisterEvent event) {
         event.addItem(new TestItem());
         event.addEntity(new TestCow());
+        event.addBlock(new TestBlock());
     }
 }
