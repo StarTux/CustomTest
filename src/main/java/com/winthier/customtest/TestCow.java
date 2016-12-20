@@ -53,7 +53,7 @@ public class TestCow extends DefaultCustomEntity {
         }
 
         @Override
-        public void willUnloadEntity() {
+        public void entityWillUnload() {
             System.out.println("Test Cow over and out!");
         }
     };
