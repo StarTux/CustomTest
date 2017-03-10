@@ -1,45 +1,38 @@
 package com.winthier.customtest;
 
-import com.winthier.custom.CustomConfig;
-import com.winthier.custom.block.*;
-import lombok.*;
+import com.winthier.custom.block.BlockWatcher;
+import com.winthier.custom.block.CustomBlock;
+import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 
 @Getter
 public class TestBlock implements CustomBlock {
-    final String customId = "Test";
+    private final String customId = "test:web";
 
     @Override
-    public void setBlock(Block block, CustomConfig config) {
+    public void setBlock(Block block) {
         block.setType(Material.WEB);
     }
 
-    @Override
-    public BlockWatcher createBlockWatcher(Block block, CustomConfig config) {
-        return new TestBlockWatcher(block, this, config);
+    @EventHandler
+    public void onBlockDamage(BlockDamageEvent event) {
+        event.setCancelled(true);
+        Block block = event.getBlock();
+        block.getWorld().playSound(block.getLocation().add(0.5, 0.5, 0.5), Sound.ENTITY_CAT_AMBIENT, 1.0f, 1.0f);
     }
 
-    @Getter @RequiredArgsConstructor
-    public static class TestBlockWatcher extends AbstractBlockWatcher {
-        final Block block;
-        final TestBlock customBlock;
-        final CustomConfig customConfig;
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent event) {
+        event.setCancelled(true);
+    }
 
-        @Override
-        public void didDiscoverBlock() {
-            System.out.println("Discover Test Block " + block);
-        }
-
-        @EventHandler
-        public void onBlockDamage(BlockDamageEvent event) {
-            System.out.println(event.getEventName());
-            event.setCancelled(true);
-            Block block = event.getBlock();
-            block.getWorld().playSound(block.getLocation().add(0.5, 0.5, 0.5), Sound.ENTITY_CAT_AMBIENT, 1.0f, 1.0f);
-        }
+    @Override
+    public void blockWasLoaded(BlockWatcher blockWatcher) {
+        System.out.println("Load Test Block " + blockWatcher.getBlock());
     }
 }

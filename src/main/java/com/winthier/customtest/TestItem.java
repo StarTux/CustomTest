@@ -1,38 +1,25 @@
 package com.winthier.customtest;
 
 import com.winthier.custom.CustomConfig;
-import com.winthier.custom.CustomPlugin;
 import com.winthier.custom.item.CustomItem;
-import com.winthier.custom.item.DefaultCustomItem;
 import com.winthier.custom.item.ItemContext;
 import lombok.Getter;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
-import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerFishEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 @Getter
 public class TestItem implements CustomItem {
-    final String customId = "Test";
+    private final String customId = "Test";
 
     @Override
     public ItemStack spawnItemStack(int amount, CustomConfig config) {
         return new ItemStack(Material.FISHING_ROD, amount);
     }
-    
+
     // @EventHandler
     // public void handlePlayerInteract(PlayerInteractEvent event) {
     //     if (event.isCancelled()) return;
@@ -61,9 +48,9 @@ public class TestItem implements CustomItem {
     @EventHandler
     public void onPlayerSwapHandItems(PlayerSwapHandItemsEvent event) {
         ItemContext context = ItemContext.of(event);
-        if (context.getPosition() != ItemContext.Position.HAND) return;
+        if (context.position != ItemContext.Position.HAND) return;
         event.setCancelled(true);
-        context.getPlayer().sendMessage("BOOM");
+        context.player.sendMessage("BOOM");
     }
 
     @EventHandler
