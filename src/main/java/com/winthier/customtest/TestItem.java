@@ -2,6 +2,7 @@ package com.winthier.customtest;
 
 import com.winthier.custom.item.CustomItem;
 import com.winthier.custom.item.ItemContext;
+import com.winthier.custom.item.TickableItem;
 import com.winthier.custom.util.Msg;
 import java.util.Random;
 import lombok.Getter;
@@ -22,12 +23,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
 @Getter
-public class TestItem implements CustomItem {
+public class TestItem implements CustomItem, TickableItem {
     private final String customId = "test:stick";
     private final Random random = new Random(System.currentTimeMillis());
 
     @Override
     public ItemStack spawnItemStack(int amount) {
+        Material mat;
         ItemStack item = new ItemStack(Material.STICK, amount);
         ItemMeta meta = item.getItemMeta();
         meta.addEnchant(Enchantment.DURABILITY, 1, true);
@@ -65,6 +67,10 @@ public class TestItem implements CustomItem {
     public void onPlayerSwapHandItems(PlayerSwapHandItemsEvent event, ItemContext context) {
         if (context.getPosition() != ItemContext.Position.HAND) return;
         event.getPlayer().playSound(event.getPlayer().getEyeLocation(), Sound.ENTITY_CAT_AMBIENT, 1.0f, 1.0f);
-        event.setCancelled(true);
+    }
+
+    @Override
+    public void onTick(ItemContext context) {
+        
     }
 }

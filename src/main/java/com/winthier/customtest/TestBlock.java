@@ -4,6 +4,7 @@ import com.winthier.custom.CustomPlugin;
 import com.winthier.custom.block.BlockContext;
 import com.winthier.custom.block.BlockWatcher;
 import com.winthier.custom.block.CustomBlock;
+import com.winthier.custom.block.TickableBlock;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -13,7 +14,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 
 @Getter
-public class TestBlock implements CustomBlock {
+public class TestBlock implements CustomBlock, TickableBlock {
     private final String customId = "test:web";
 
     @Override
@@ -42,5 +43,9 @@ public class TestBlock implements CustomBlock {
     @Override
     public void blockWasCreated(BlockWatcher blockWatcher) {
         CustomPlugin.getInstance().getBlockManager().saveBlockData(blockWatcher, "This is a test!\nThis is a test!\nThis is a test!");
+    }
+
+    @Override
+    public void onTick(BlockWatcher watcher) {
     }
 }
